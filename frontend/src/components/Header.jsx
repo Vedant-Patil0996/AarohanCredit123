@@ -1,21 +1,30 @@
 // src/components/Header.jsx
 
 import React, { useState, Fragment } from 'react';
-import pfp1 from "../assets/pfp1.jpg"; // Assuming this path is correct
+// Assuming 'pfp1' path is correct and 'SyncModal' component exists
+import pfp1 from "../assets/pfp1.jpg"; 
 import {
     Menu,
     Sun,
     Moon,
     Globe,
-    RefreshCw, // Keep RefreshCw imported for simplicity, even if unused/modified
+    RefreshCw,
 } from 'lucide-react';
-import SyncModal from './sync-modal'; // Assuming this component exists
+import SyncModal from './sync-modal'; // Placeholder for the actual modal component
 
-// Note: The Header component is now generic but will behave differently 
-// based on whether it's used in LenderDashboard or MsmeDashboard.
-// For the LenderDashboard, we will pass props to hide the explicit sync.
-
-const Header = ({ user, isSyncing, toggleSidebar, isDarkMode, toggleTheme, showSync = false, onSync }) => {
+/**
+ * Header Component
+ * Displays navigation controls, theme toggle, sync button (for MSME), and user profile.
+ * * @param {object} user - User object with name, gstin/branch.
+ * @param {boolean} isSyncing - State of data syncing.
+ * @param {function} toggleSidebar - Function to open/close the mobile sidebar.
+ * @param {boolean} isDarkMode - Current theme state.
+ * @param {function} toggleTheme - Function to switch between light/dark mode.
+ * @param {boolean} showSync - Controls visibility of the Sync Data button (true for MSME).
+ * @param {function} onSync - Function to handle the data synchronization process.
+ * @param {string} pageTitle - The main heading for the current page.
+ */
+const Header = ({ user, isSyncing, toggleSidebar, isDarkMode, toggleTheme, showSync = false, onSync, pageTitle }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleSyncClick = () => {
@@ -31,7 +40,7 @@ const Header = ({ user, isSyncing, toggleSidebar, isDarkMode, toggleTheme, showS
     };
 
     const handleComplete = () => {
-        // Handle completion logic if needed
+        // Placeholder for completion logic
     };
 
     return (
@@ -43,10 +52,14 @@ const Header = ({ user, isSyncing, toggleSidebar, isDarkMode, toggleTheme, showS
                     <button
                         onClick={toggleSidebar}
                         className="p-2 -ml-2 mr-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white lg:hidden"
+                        aria-label="Toggle menu"
                     >
                         <Menu size={24} />
                     </button>
-                    <h2 className="text-xl font-semibold text-gray-800 dark:text-white hidden sm:block">Dashboard Overview</h2>
+                    {/* Display the custom pageTitle or default to "Dashboard Overview" */}
+                    <h2 className="text-xl font-semibold text-gray-800 dark:text-white hidden sm:block">
+                        {pageTitle || "Dashboard Overview"}
+                    </h2>
                 </div>
 
                 {/* Right: Actions */}
@@ -96,6 +109,7 @@ const Header = ({ user, isSyncing, toggleSidebar, isDarkMode, toggleTheme, showS
 
                         <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 p-[2px]">
                             <div className="w-full h-full rounded-full bg-white dark:bg-[#1a1b23] flex items-center justify-center">
+                                {/* Note: Ensure 'pfp1' asset is correctly linked */}
                                 <img src={pfp1} alt="Profile" className="w-full h-full rounded-full object-cover opacity-80" />
                             </div>
                         </div>
