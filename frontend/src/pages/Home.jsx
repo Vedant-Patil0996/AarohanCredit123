@@ -39,8 +39,8 @@ const Home = ({ isDarkMode = true, analysisComplete }) => {
   const fetchFinancialHealthData = async () => {
     try {
       const user = JSON.parse(localStorage.getItem('user') || '{}');
-      // FORCE DEMO ID: Always use MSME002 for this demo to show the analyzed data
-      const msmeId = 'MSME002';
+      // FORCE DEMO ID: Always use MSME001 for this demo to show the analyzed data
+      const msmeId = 'MSME001';
 
       // Try to fetch from backend API
       const response = await fetch(`http://localhost:5000/api/financial-health/${msmeId}`);

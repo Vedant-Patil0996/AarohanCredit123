@@ -1,16 +1,16 @@
 {
-  "report_id": "7fe121e3-748b-4ace-815f-53db811468ac",
-  "msme_id": "MSME002",
-  "generated_at": "2025-11-29T10:39:58.873793",
-  "overall_creditworthiness": 78.12,
-  "summary": "This credit intelligence report evaluates the MSME's financial profile with an overall creditworthiness score of 78.1/100. The analysis reveals a RiskLevel.LOW risk profile with a behavioral score of 730/1000. The business demonstrates positive cashflow of \u20b91,552,575.00. 2 credit products have been identified as suitable matches. Detailed analysis and recommendations are provided in the respective sections.",
-  "risk_level": "low",
-  "behavioral_score": 730.0,
-  "net_cashflow": 1552575.0,
-  "best_fit_products_count": 2,
+  "report_id": "0a92167a-9c3b-49a7-8ef6-47c27aa00c79",
+  "msme_id": "MSME001",
+  "generated_at": "2025-11-29T11:27:49.323107",
+  "overall_creditworthiness": 63.75,
+  "summary": "This credit intelligence report evaluates the MSME's financial profile with an overall creditworthiness score of 63.8/100. The analysis reveals a RiskLevel.MEDIUM risk profile with a behavioral score of 645/1000. The business demonstrates positive cashflow of \u20b9442,711.00. 1 credit products have been identified as suitable matches. Detailed analysis and recommendations are provided in the respective sections.",
+  "risk_level": "medium",
+  "behavioral_score": 645.0,
+  "net_cashflow": 442711.0,
+  "best_fit_products_count": 1,
   "key_insights": [
-    "The business exhibits strong financial health with consistent positive net cash flow and high cash flow stability, indicating a robust operational foundation.",
-    "A high behavioral score (730) and 'low' overall risk level underscore the business's reliability and disciplined financial management.",
-    "Key areas for attention include managing inherent seasonality, high balance volatility, and moderate income concentration, which require proactive cash flow planning."
+    "Your business shows strong overall financial health with significant positive net cashflow and stable cash flow patterns.",
+    "However, managing liquidity is a critical area for improvement due to high balance volatility, rapid balance changes, and a very low minimum balance.",
+    "Seasonality is a natural part of your business, but it requires careful cash flow planning to avoid liquidity crunches."
   ]
 }
