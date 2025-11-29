@@ -1,12 +1,9 @@
-// src/pages/LenderDashboard.jsx (Updated to use React Router navigation)
-
-import React, { useState, useEffect } from 'react';
+// src/pages/LenderDashboard.jsx
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LenderSidebar from '../components/Lender/LenderSidebar'; 
 import Header from '../components/Header';
 import { Wallet, Activity, ArrowUpRight, CheckCircle, Clock } from 'lucide-react';
-
-// === CHART IMPORTS (Assuming 'recharts' is installed) ===
 import {
     PieChart, Pie, Cell, ResponsiveContainer,
     LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend
@@ -18,7 +15,7 @@ const segmentData = [
     { name: 'Small', value: 3000 },
     { name: 'Medium', value: 2500 },
 ];
-const COLORS = ['#3b82f6', '#f59e0b', '#10b981']; // Blue, Amber, Emerald
+const COLORS = ['#4da3ff', '#2c7be5', '#1e40af']; // Neon blue shades
 
 const trendData = [
     { name: 'Jan', HighRisk: 15, LowRisk: 40 },
@@ -30,7 +27,6 @@ const trendData = [
 ];
 
 // --- Chart Components ---
-
 const SegmentPieChart = () => (
     <ResponsiveContainer width="100%" height={300}>
         <PieChart>
@@ -40,7 +36,6 @@ const SegmentPieChart = () => (
                 cy="50%"
                 innerRadius={60}
                 outerRadius={90}
-                fill="#8884d8"
                 paddingAngle={5}
                 dataKey="value"
                 labelLine={false}
@@ -52,9 +47,9 @@ const SegmentPieChart = () => (
             </Pie>
             <Tooltip 
                 contentStyle={{ 
-                    backgroundColor: '#1a1b23', 
-                    border: '1px solid #374151', 
-                    borderRadius: '8px' 
+                    backgroundColor: '#111217', 
+                    border: '1px solid #4da3ff', 
+                    borderRadius: '10px' 
                 }} 
                 labelStyle={{ color: '#fff' }}
                 formatter={(value, name) => [`₹ ${value.toLocaleString()} Cr`, name]}
@@ -64,46 +59,43 @@ const SegmentPieChart = () => (
     </ResponsiveContainer>
 );
 
-const RiskTrendLineChart = ({ isDarkMode }) => (
+const RiskTrendLineChart = () => (
     <ResponsiveContainer width="100%" height={300}>
         <LineChart data={trendData}>
-            <CartesianGrid strokeDasharray="3 3" stroke={isDarkMode ? '#374151' : '#e5e7eb'} />
-            <XAxis dataKey="name" stroke={isDarkMode ? '#9ca3af' : '#4b5563'} />
-            <YAxis stroke={isDarkMode ? '#9ca3af' : '#4b5563'} />
+            <CartesianGrid strokeDasharray="3 3" stroke="#2c2c2c" />
+            <XAxis dataKey="name" stroke="#9ca3af" />
+            <YAxis stroke="#9ca3af" />
             <Tooltip 
                 contentStyle={{ 
-                    backgroundColor: '#1a1b23', 
-                    border: '1px solid #374151', 
-                    borderRadius: '8px' 
+                    backgroundColor: '#111217', 
+                    border: '1px solid #4da3ff', 
+                    borderRadius: '10px' 
                 }} 
                 labelStyle={{ color: '#fff' }}
                 formatter={(value) => [`${value} Apps`, "Applications"]}
             />
             <Legend />
-            <Line type="monotone" dataKey="HighRisk" stroke="#ef4444" strokeWidth={2} name="High Risk Apps" />
-            <Line type="monotone" dataKey="LowRisk" stroke="#10b981" strokeWidth={2} name="Low Risk Apps" />
+            <Line type="monotone" dataKey="HighRisk" stroke="#f87171" strokeWidth={2} name="High Risk Apps" />
+            <Line type="monotone" dataKey="LowRisk" stroke="#4da3ff" strokeWidth={2} name="Low Risk Apps" />
         </LineChart>
     </ResponsiveContainer>
 );
 
-
-// Reusable Card component for dashboard metrics
+// Reusable Neon Card component
 const StatCard = ({ title, value, icon: Icon, percentage, color }) => {
-    // Note: The original StatCard had a bug: percentageIcon was always ArrowUpRight.
-    // I am keeping the logic as is to minimize change but noting it is an intentional copy.
     const isPositive = percentage && parseFloat(percentage) >= 0;
-    const percentageColor = isPositive ? 'text-emerald-400' : 'text-rose-400';
-    const percentageIcon = ArrowUpRight; // Kept as original to match your code
+    const percentageColor = isPositive ? 'text-[#4da3ff]' : 'text-[#f87171]';
+    const percentageIcon = ArrowUpRight;
 
     return (
-        <div className="bg-white dark:bg-[#1a1b23] p-5 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 transition-all hover:shadow-xl">
+        <div className="p-5 rounded-xl border border-[#4da3ff]/50 shadow-[0_0_25px_#4da3ff]/50 bg-[#111217] hover:shadow-[0_0_35px_#4da3ff]/70 transition-all">
             <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">{title}</span>
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center opacity-80`} style={{ backgroundColor: color, color: '#fff' }}>
+                <span className="text-sm font-medium text-gray-400">{title}</span>
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center`} style={{ backgroundColor: color, color: '#fff' }}>
                     <Icon size={16} />
                 </div>
             </div>
-            <p className="text-3xl font-bold mt-2 text-gray-900 dark:text-white">{value}</p>
+            <p className="text-3xl font-bold mt-2 text-white">{value}</p>
             {percentage && (
                 <div className="flex items-center mt-3">
                     <span className={`text-xs font-semibold ${percentageColor} flex items-center`}>
@@ -116,7 +108,7 @@ const StatCard = ({ title, value, icon: Icon, percentage, color }) => {
     );
 };
 
-// Placeholder for a simple table of recent applications 
+// Recent Applications Table
 const RecentApplicationsTable = () => {
     const applications = [
         { id: 'CRD781', msme: 'Vedant Empires', amount: '₹ 15 L', score: 780, status: 'Reviewing', date: '2025-11-27' },
@@ -126,41 +118,41 @@ const RecentApplicationsTable = () => {
 
     const getStatusStyles = (status) => {
         switch (status) {
-            case 'Reviewing': return 'bg-yellow-500/20 text-yellow-400';
-            case 'Pending Data': return 'bg-blue-500/20 text-blue-400';
-            case 'Approved': return 'bg-emerald-500/20 text-emerald-400';
+            case 'Reviewing': return 'bg-yellow-500/30 text-yellow-400';
+            case 'Pending Data': return 'bg-blue-500/30 text-blue-400';
+            case 'Approved': return 'bg-emerald-500/30 text-emerald-400';
             default: return 'bg-gray-500/20 text-gray-400';
         }
     };
 
     return (
-        <div className="bg-white dark:bg-[#1a1b23] p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 mt-8">
-            <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">New Application Pipeline</h3>
+        <div className="bg-[#111217] p-6 rounded-xl border border-[#4da3ff]/50 shadow-[0_0_25px_#4da3ff]/40 mt-8">
+            <h3 className="text-xl font-semibold mb-4 text-white">New Application Pipeline</h3>
             <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                <table className="min-w-full divide-y divide-gray-700">
                     <thead>
                         <tr>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Application ID</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">MSME Name</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Requested Amount</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">AI Score</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
-                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Date</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Application ID</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">MSME Name</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Requested Amount</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">AI Score</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Status</th>
+                            <th className="px-4 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Date</th>
                         </tr>
                     </thead>
-                    <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
+                    <tbody className="divide-y divide-gray-700">
                         {applications.map((app) => (
-                            <tr key={app.id} className="hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-                                <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-indigo-500">{app.id}</td>
-                                <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">{app.msme}</td>
-                                <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">{app.amount}</td>
-                                <td className="px-4 py-4 whitespace-nowrap text-sm font-semibold text-gray-700 dark:text-gray-300">{app.score}</td>
+                            <tr key={app.id} className="hover:bg-gray-900/40 transition-colors">
+                                <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-[#4da3ff]">{app.id}</td>
+                                <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{app.msme}</td>
+                                <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">{app.amount}</td>
+                                <td className="px-4 py-4 whitespace-nowrap text-sm font-semibold text-gray-300">{app.score}</td>
                                 <td className="px-4 py-4 whitespace-nowrap">
                                     <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusStyles(app.status)}`}>
                                         {app.status}
                                     </span>
                                 </td>
-                                <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{app.date}</td>
+                                <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-400">{app.date}</td>
                             </tr>
                         ))}
                     </tbody>
@@ -170,109 +162,58 @@ const RecentApplicationsTable = () => {
     );
 };
 
-// Main Lender Dashboard Component
+// Main Dashboard
 export default function LenderDashboard() {
     const navigate = useNavigate();
-    // Removed activeTab state since navigation is now handled by the router
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [isDarkMode, setIsDarkMode] = useState(true);
     const [user] = useState({ name: 'HDFC Bank Team', branch: 'Mumbai-HQ' }); 
 
-    useEffect(() => {
-        const root = window.document.documentElement;
-        if (isDarkMode) {
-            root.classList.add('dark');
-        } else {
-            root.classList.remove('dark');
-        }
-    }, [isDarkMode]);
+    const dashboardContent = (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <StatCard title="Total Portfolio Value" value="₹ 500 Cr" icon={Wallet} percentage="+3.2" color="#4da3ff" />
+            <StatCard title="New Applications" value="45" icon={Activity} percentage="-12.5" color="#2c7be5" />
+            <StatCard title="Approval Rate (30 Days)" value="88.4%" icon={CheckCircle} percentage="+1.1" color="#1e40af" />
+            <StatCard title="Avg. Decision Time" value="12 hrs" icon={Clock} percentage="-20" color="#0ea5e9" />
+
+            <div className="lg:col-span-4">
+                <RecentApplicationsTable />
+            </div>
+
+            <div className="md:col-span-2 bg-[#111217] p-6 rounded-xl border border-[#4da3ff]/50 shadow-[0_0_25px_#4da3ff]/50">
+                <h3 className="text-xl font-semibold mb-4 text-white">MSME Segment Distribution</h3>
+                <SegmentPieChart />
+            </div>
+            <div className="md:col-span-2 bg-[#111217] p-6 rounded-xl border border-[#4da3ff]/50 shadow-[0_0_25px_#4da3ff]/50">
+                <h3 className="text-xl font-semibold mb-4 text-white">Risk Profile Trends (30D)</h3>
+                <RiskTrendLineChart />
+            </div>
+        </div>
+    );
 
     const handleLogout = () => {
         localStorage.removeItem('user');
         navigate('/');
     };
 
-    const toggleTheme = () => {
-        setIsDarkMode(!isDarkMode);
-    }
-    
-    // The main dashboard content remains here, all other pages are now separate routes.
-    const dashboardContent = (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Row 1: Key Metrics */}
-            <StatCard 
-                title="Total Portfolio Value" 
-                value="₹ 500 Cr" 
-                icon={Wallet} 
-                percentage="+3.2" 
-                color="#3b82f6" 
-            />
-            <StatCard 
-                title="New Applications" 
-                value="45" 
-                icon={Activity} 
-                percentage="-12.5" 
-                color="#f59e0b" 
-            />
-            <StatCard 
-                title="Approval Rate (30 Days)" 
-                value="88.4%" 
-                icon={CheckCircle} 
-                percentage="+1.1" 
-                color="#10b981" 
-            />
-            <StatCard 
-                title="Avg. Decision Time" 
-                value="12 hrs" 
-                icon={Clock} 
-                percentage="-20" 
-                color="#ef4444" 
-            />
-            
-            {/* Row 2: Application Table */}
-            <div className="lg:col-span-4">
-                <RecentApplicationsTable />
-            </div>
-            
-            {/* Row 3: Charts */}
-            <div className="md:col-span-2 bg-white dark:bg-[#1a1b23] p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800">
-                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">MSME Segment Distribution</h3>
-                <SegmentPieChart />
-            </div>
-            <div className="md:col-span-2 bg-white dark:bg-[#1a1b23] p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800">
-                <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Risk Profile Trends (30D)</h3>
-                <RiskTrendLineChart isDarkMode={isDarkMode} />
-            </div>
-        </div>
-    );
-
-
     return (
-        <div className="min-h-screen bg-gray-100 dark:bg-[#111217] font-sans selection:bg-indigo-500/30 text-gray-800 dark:text-gray-100">
-
-            {/* 1. Sidebar Component */}
+        <div className="min-h-screen bg-[#0f1116] font-sans text-gray-100 selection:bg-[#4da3ff]/30">
             <LenderSidebar
-                activeTab="dashboard" // Explicitly set active tab
-                setActiveTab={(tab) => navigate(`/lender-${tab}`)} // Uses navigate to change route
+                activeTab="dashboard"
+                setActiveTab={(tab) => navigate(`/lender-${tab}`)}
                 isOpen={sidebarOpen}
                 setIsOpen={setSidebarOpen}
                 onLogout={handleLogout}
             />
 
-            {/* Main Content Wrapper */}
             <div className="lg:ml-64 min-h-screen flex flex-col">
-
-                {/* 2. Header Component */}
                 <Header
                     user={user}
-                    showSync={false} 
+                    showSync={false}
                     toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
-                    isDarkMode={isDarkMode}
-                    toggleTheme={toggleTheme}
-                    pageTitle="Dashboard Overview" // Set the title explicitly
+                    isDarkMode={true}
+                    toggleTheme={() => {}}
+                    pageTitle="Dashboard Overview"
                 />
-
-                {/* 3. Page Content */}
                 <main className="flex-1 p-6 lg:p-8 overflow-y-auto">
                     {dashboardContent}
                 </main>

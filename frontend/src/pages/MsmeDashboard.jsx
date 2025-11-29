@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import Home from '../pages/Home';
-import Reports from '../pages/Reports';
+import SearchLoans from '../pages/SearchLoans';
+import LoanApplications from '../pages/LoanApplications';
+import Approvals from '../pages/Approvals';
+import FinHealthAnalysis from '../pages/FinHealthAnalysis';
+import Notifications from '../pages/Notifications';
 import { Activity } from 'lucide-react';
 
 export default function MsmeDashboard() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState('home');
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
@@ -56,6 +61,62 @@ export default function MsmeDashboard() {
     setIsDarkMode(!isDarkMode);
   }
 
+  const ROUTE_TO_TAB = {
+    '/msme-dashboard': 'home',
+    '/search-loans': 'search',
+    '/loan-applications': 'loans',
+    '/approvals': 'approvals',
+    '/analysis': 'finhealth-analysis',
+    '/reports': 'reports',
+    '/notifications': 'notifications',
+  };
+
+  useEffect(() => {
+    const nextTab = ROUTE_TO_TAB[location.pathname] || 'home';
+    setActiveTab(nextTab);
+  }, [location.pathname]);
+
+  const PAGE_TITLES = {
+    home: 'Financial Health',
+    search: 'Search Lenders',
+    loans: 'Loan Applications',
+    approvals: 'Approved Offers',
+    reports: 'Detailed Reports',
+    notifications: 'Notifications',
+    'finhealth-analysis': 'Health Analysis Agent',
+  };
+
+  const msmeId = user?.msme_id || user?.id || 'MSME002';
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'home':
+        return <Home isDarkMode={isDarkMode} />;
+      case 'search':
+        return <SearchLoans />;
+      case 'loans':
+        return <LoanApplications />;
+      case 'approvals':
+        return <Approvals />;
+      case 'finhealth-analysis':
+        return <FinHealthAnalysis msmeId={msmeId} />;
+      case 'reports':
+        return <Reports isDarkMode={isDarkMode} />;
+      case 'notifications':
+        return <Notifications />;
+      default:
+        return (
+          <div className="flex flex-col items-center justify-center h-[60vh] text-white/60">
+            <div className="w-16 h-16 bg-[#151920] rounded-2xl flex items-center justify-center mb-4 border border-[#00FF75]/20">
+              <Activity size={32} className="text-[#00FF75]" />
+            </div>
+            <h2 className="text-xl font-semibold text-white capitalize">{activeTab} Module</h2>
+            <p className="text-sm mt-2 text-white/40">Connecting to backend services...</p>
+          </div>
+        );
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0a0d12] font-sans text-white">
       {/* Subtle grid overlay */}
@@ -88,7 +149,8 @@ export default function MsmeDashboard() {
           toggleSidebar={() => setSidebarOpen(!sidebarOpen)}
           isDarkMode={isDarkMode}
           toggleTheme={toggleTheme}
-          showSync={true}
+          showSync={activeTab === 'home'}
+          pageTitle={PAGE_TITLES[activeTab] || 'Dashboard Overview'}
         />
 
         {/* 3. Page Content */}
