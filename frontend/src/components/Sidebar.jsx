@@ -8,7 +8,8 @@ import {
   LayoutDashboard,
   LogOut,
   Wallet,
-  Menu, // Added for mobile toggle icon
+  Menu,
+  Search, // Added for mobile toggle icon
 } from 'lucide-react';
 
 const Sidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, onLogout }) => {
@@ -16,10 +17,11 @@ const Sidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, onLogout }) => {
 
   const menuItems = [
     { id: 'home', label: 'Dashboard', icon: LayoutDashboard, path: '/msme-dashboard' },
+    { id: 'search', label: 'Search for Loans', icon: Search, path: '/search-loans' },
     { id: 'loans', label: 'Loan Applications', icon: Wallet, path: '/loan-applications' },
-    { id: 'approvals', label: 'Approvals & Offers', icon: CheckCircle, path: '/approvals' }, // Placeholder path
-    { id: 'reports', label: 'Detailed Reports', icon: FileText, path: '/reports' }, // Placeholder path
-    { id: 'notifications', label: 'Notifications', icon: Bell, path: '/notifications' }, // Placeholder path
+    { id: 'approvals', label: 'Approvals & Offers', icon: CheckCircle, path: '/approvals' },
+    { id: 'finhealth-analysis', label: 'FinHealth Analysis', icon: FileText, path: '/analysis' },
+    { id: 'notifications', label: 'Notifications', icon: Bell, path: '/notifications' },
   ];
 
   const handleNavigation = (item) => {
