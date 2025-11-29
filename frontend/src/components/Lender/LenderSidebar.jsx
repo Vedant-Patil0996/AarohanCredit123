@@ -1,4 +1,4 @@
-// src/components/Lender/LenderSidebar.jsx (UPDATED)
+// src/components/Lender/LenderSidebar.jsx
 
 import React from 'react';
 import {
@@ -8,29 +8,24 @@ import {
     LayoutDashboard,
     LogOut,
     FileText,
-    Settings, // New icon for Policies
+    Settings,
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 const LenderSidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, onLogout }) => {
-    const navigate = useNavigate(); // Initialize useNavigate hook
+    const navigate = useNavigate();
 
-    // Lender-specific menu items
     const menuItems = [
         { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, route: '/lender-dashboard' },
-        { id: 'loans', label: 'Loan Applications', icon: Wallet, route: '/lender-loans' }, // Updated from 'applications' to 'loans'
-        { id: 'policies', label: 'Lending Policies', icon: Settings, route: '/lender-policies' }, // New Policy link
-        { id: 'reports', label: 'Detailed Reports', icon: FileText, route: '/lender-reports' }, // Placeholder route
-        { id: 'notifications', label: 'Notifications', icon: Bell, route: '/lender-notifications' }, // Placeholder route
+        { id: 'loans', label: 'Loan Applications', icon: Wallet, route: '/lender-loans' },
+        { id: 'policies', label: 'Lending Policies', icon: Settings, route: '/lender-policies' },
+        { id: 'reports', label: 'Detailed Reports', icon: FileText, route: '/lender-reports' },
+        { id: 'notifications', label: 'Notifications', icon: Bell, route: '/lender-notifications' },
     ];
 
     const handleNavigation = (item) => {
-        // Use navigate to change the route
-        navigate(item.route); 
-        // Also call setActiveTab for internal component state if needed (optional, but keeps signature)
-        if (setActiveTab) {
-            setActiveTab(item.id);
-        }
+        navigate(item.route);
+        if (setActiveTab) setActiveTab(item.id);
         setIsOpen(false);
     };
 
@@ -38,55 +33,86 @@ const LenderSidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, onLogout })
         <>
             {/* Mobile Overlay */}
             {isOpen && (
-                <div 
+                <div
                     className="fixed inset-0 bg-black/50 z-40 lg:hidden"
                     onClick={() => setIsOpen(false)}
                 />
             )}
 
-            {/* Sidebar Container */}
-            <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-[#1a1b23] text-gray-500 dark:text-gray-400 border-r border-gray-200 dark:border-gray-800 transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-                
+            {/* Sidebar */}
+            <aside
+                className={`fixed inset-y-0 left-0 z-50 w-64 
+                bg-[#0a0d12] text-white/60 
+                border-r border-[#4da3ff]/20
+                transition-transform duration-300 ease-in-out 
+                ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}
+            >
+
                 {/* Logo Section */}
-                <div className="h-20 flex items-center px-6 border-b border-gray-200 dark:border-gray-800">
-                    <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center mr-3">
-                        <Activity className="text-white w-5 h-5" />
+                <div className="h-20 flex items-center px-6 border-b border-[#4da3ff]/20">
+                    <div className="w-10 h-10 rounded-lg 
+                        bg-gradient-to-br from-[#4da3ff] to-[#82c0ff]
+                        flex items-center justify-center mr-3 
+                        shadow-[0_0_15px_#4da3ff]">
+                        <Activity className="text-[#0a0d12] w-6 h-6" />
                     </div>
-                    <span className="text-xl font-bold text-gray-800 dark:text-white tracking-tight">CrediFlow</span>
+                    <span className="text-xl font-bold text-white tracking-tight">
+                        CrediFlow
+                    </span>
                 </div>
 
                 {/* Navigation */}
                 <nav className="p-4 space-y-2 mt-4">
-                    <div className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-4 px-4">Menu</div>
+                    <div className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-4 px-4">
+                        Menu
+                    </div>
+
                     {menuItems.map((item) => (
                         <button
                             key={item.id}
                             onClick={() => handleNavigation(item)}
-                            className={`w-full flex items-center space-x-3 px-4 py-3.5 rounded-xl transition-all duration-200 group ${
-                                activeTab === item.id
-                                    ? 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white shadow-lg shadow-black/5 dark:shadow-black/20'
-                                    : 'hover:bg-gray-100/50 dark:hover:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
-                            }`}
+                            className={`w-full flex items-center space-x-3 px-4 py-3.5 rounded-xl
+                                transition-all duration-200 group
+                                ${
+                                    activeTab === item.id
+                                        ? 'bg-[#4da3ff]/25 text-white border border-[#4da3ff]/40 shadow-[0_0_15px_#4da3ff]/40'
+                                        : 'hover:bg-[#4da3ff]/15 text-white/60 hover:text-white hover:border border-[#4da3ff]/30'
+                                }`}
                         >
-                            <item.icon size={20} className={`${activeTab === item.id ? 'text-indigo-500 dark:text-indigo-400' : 'text-gray-400 dark:text-gray-500 group-hover:text-indigo-500 dark:group-hover:text-indigo-400'} transition-colors`} />
+                            <item.icon
+                                size={20}
+                                className={`${
+                                    activeTab === item.id
+                                        ? 'text-[#4da3ff]'
+                                        : 'text-white/40 group-hover:text-[#4da3ff]'
+                                } transition-colors`}
+                            />
+
                             <span className="font-medium text-sm">{item.label}</span>
+
                             {item.id === 'notifications' && (
-                                <span className="ml-auto w-5 h-5 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">12</span>
+                                <span className="ml-auto w-5 h-5 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                                    12
+                                </span>
                             )}
                         </button>
                     ))}
                 </nav>
 
-                {/* Bottom Actions */}
-                <div className="absolute bottom-0 w-full p-4 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-[#1a1b23]">
-                    <button 
+                {/* Sign Out */}
+                <div className="absolute bottom-0 w-full p-4 border-t border-[#4da3ff]/20 bg-[#0a0d12]">
+                    <button
                         onClick={onLogout}
-                        className="flex items-center space-x-3 text-gray-600 dark:text-gray-400 hover:text-rose-500 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 px-4 py-3 rounded-xl transition-all w-full"
+                        className="flex items-center space-x-3 text-white/60 
+                                hover:text-red-400 hover:bg-red-400/10 
+                                px-4 py-3 rounded-xl transition-all w-full 
+                                border border-transparent hover:border-red-400/20"
                     >
                         <LogOut size={20} />
                         <span className="font-medium text-sm">Sign Out</span>
                     </button>
                 </div>
+
             </aside>
         </>
     );
