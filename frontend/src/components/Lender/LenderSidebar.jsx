@@ -57,7 +57,7 @@ const LenderSidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, onLogout })
                         <Activity className="text-[#0a0d12] w-6 h-6" />
                     </div>
                     <span className="text-xl font-bold text-white tracking-tight">
-                        CrediFlow
+                        Aarohan Credit
                     </span>
                 </div>
 
