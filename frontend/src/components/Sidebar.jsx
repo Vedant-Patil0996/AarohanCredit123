@@ -43,29 +43,29 @@ const Sidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, onLogout }) => {
 
       {/* Sidebar Container */}
       {/* Used the dark theme classes from your MsmeDashboard reference */}
-      <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-gray-100 dark:bg-[#1a1b23] text-gray-500 dark:text-gray-400 border-r border-gray-200 dark:border-gray-800 transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
+      <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-[#0a0d12] text-white/60 border-r border-[#00FF75]/10 transition-transform duration-300 ease-in-out ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
 
         {/* Logo Section */}
-        <div className="h-20 flex items-center px-6 border-b border-gray-200 dark:border-gray-800">
-          <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center mr-3">
-            <Activity className="text-white w-5 h-5" />
+        <div className="h-20 flex items-center px-6 border-b border-[#00FF75]/10">
+          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00FF75] to-[#0DF86A] flex items-center justify-center mr-3 shadow-[0_0_15px_#00ff75]">
+            <span className="text-[#0a0d12] font-bold text-lg">CS</span>
           </div>
-          <span className="text-xl font-bold text-gray-800 dark:text-white tracking-tight">CrediFlow</span>
+          <span className="text-xl font-bold text-white tracking-tight">CreditSphere AI</span>
         </div>
 
         {/* Navigation */}
         <nav className="p-4 space-y-2 mt-4">
-          <div className="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-4 px-4">Menu</div>
+          <div className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-4 px-4">Menu</div>
           {menuItems.map((item) => (
             <button
               key={item.id}
               onClick={() => handleNavigation(item)}
               className={`w-full flex items-center space-x-3 px-4 py-3.5 rounded-xl transition-all duration-200 group ${activeTab === item.id
-                  ? 'bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-white shadow-lg shadow-black/5 dark:shadow-black/20'
-                  : 'hover:bg-gray-200/50 dark:hover:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200'
+                  ? 'bg-[#00FF75]/20 text-white border border-[#00FF75]/30 shadow-[0_0_15px_#00ff75]/20'
+                  : 'hover:bg-[#00FF75]/10 text-white/60 hover:text-white hover:border border-[#00FF75]/20'
                 }`}
             >
-              <item.icon size={20} className={`${activeTab === item.id ? 'text-indigo-500 dark:text-indigo-400' : 'text-gray-400 dark:text-gray-500 group-hover:text-indigo-500 dark:group-hover:text-indigo-400'} transition-colors`} />
+              <item.icon size={20} className={`${activeTab === item.id ? 'text-[#00FF75]' : 'text-white/40 group-hover:text-[#00FF75]'} transition-colors`} />
               <span className="font-medium text-sm">{item.label}</span>
               {item.id === 'notifications' && (
                 <span className="ml-auto w-5 h-5 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">3</span>
@@ -75,10 +75,10 @@ const Sidebar = ({ activeTab, setActiveTab, isOpen, setIsOpen, onLogout }) => {
         </nav>
 
         {/* Bottom Actions */}
-        <div className="absolute bottom-0 w-full p-4 border-t border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-[#1a1b23]">
+        <div className="absolute bottom-0 w-full p-4 border-t border-[#00FF75]/10 bg-[#0a0d12]">
           <button
             onClick={onLogout}
-            className="flex items-center space-x-3 text-gray-600 dark:text-gray-400 hover:text-rose-500 dark:hover:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-500/10 px-4 py-3 rounded-xl transition-all w-full"
+            className="flex items-center space-x-3 text-white/60 hover:text-red-400 hover:bg-red-400/10 px-4 py-3 rounded-xl transition-all w-full border border-transparent hover:border-red-400/20"
           >
             <LogOut size={20} />
             <span className="font-medium text-sm">Sign Out</span>

@@ -3,6 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 import authRoutes from './src/routes/authRoutes.js';
+import financialHealthRoutes from './src/routes/financialHealthRoutes.js';
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(cors());
 
 // ---------- ROUTES ----------
 app.use('/api/auth', authRoutes);
+app.use('/api/financial-health', financialHealthRoutes);
 
 // ---------- DATABASE CONNECTION ----------
 mongoose

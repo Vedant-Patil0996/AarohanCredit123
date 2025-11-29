@@ -45,19 +45,19 @@ const Header = ({ user, isSyncing, toggleSidebar, isDarkMode, toggleTheme, showS
 
     return (
         <Fragment>
-            <header className="h-20 bg-white/80 dark:bg-[#1a1b23]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 sticky top-0 z-30 px-4 lg:px-8 flex items-center justify-between">
+            <header className="h-20 bg-[#0a0d12]/95 backdrop-blur-xl border-b border-[#00FF75]/10 sticky top-0 z-30 px-4 lg:px-8 flex items-center justify-between">
 
                 {/* Left: Mobile Toggle & Title */}
                 <div className="flex items-center">
-                    <button
+                        <button
                         onClick={toggleSidebar}
-                        className="p-2 -ml-2 mr-2 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white lg:hidden"
+                        className="p-2 -ml-2 mr-2 text-white/60 hover:text-white lg:hidden"
                         aria-label="Toggle menu"
                     >
                         <Menu size={24} />
                     </button>
                     {/* Display the custom pageTitle or default to "Dashboard Overview" */}
-                    <h2 className="text-xl font-semibold text-gray-800 dark:text-white hidden sm:block">
+                    <h2 className="text-xl font-semibold text-white hidden sm:block">
                         {pageTitle || "Dashboard Overview"}
                     </h2>
                 </div>
@@ -71,18 +71,18 @@ const Header = ({ user, isSyncing, toggleSidebar, isDarkMode, toggleTheme, showS
                             <button
                                 onClick={handleSyncClick}
                                 disabled={isSyncing}
-                                className="flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-all shadow-lg shadow-indigo-500/30 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
+                                className="flex items-center space-x-2 bg-[#00FF75] hover:bg-[#0DF86A] text-[#0a0d12] px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-[0_0_20px_#00ff75] hover:shadow-[0_0_30px_#00ff75] active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
                             >
                                 <RefreshCw size={16} className={isSyncing ? 'animate-spin' : ''} />
                                 <span>{isSyncing ? 'Syncing...' : 'Sync Data'}</span>
                             </button>
-                            <span className="text-[10px] text-gray-500 mt-1.5 font-mono">Last: Today 10:42 AM</span>
+                            <span className="text-[10px] text-white/40 mt-1.5 font-mono">Last: Today 10:42 AM</span>
                         </div>
                     )}
                     
                     {/* Translation Button */}
                     <button
-                        className="p-2 rounded-lg bg-gray-200/60 dark:bg-gray-800/60 border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-300/70 dark:hover:bg-gray-700 transition-colors"
+                        className="p-2 rounded-lg bg-[#151920] border border-[#00FF75]/20 text-white/60 hover:text-white hover:border-[#00FF75]/40 transition-colors"
                         aria-label="Translate"
                     >
                         <Globe size={18} />
@@ -91,24 +91,24 @@ const Header = ({ user, isSyncing, toggleSidebar, isDarkMode, toggleTheme, showS
                     {/* Theme Toggle */}
                     <button
                         onClick={toggleTheme}
-                        className="p-2 rounded-lg bg-gray-200/60 dark:bg-gray-800/60 border border-gray-300 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-300/70 dark:hover:bg-gray-700 transition-colors"
+                        className="p-2 rounded-lg bg-[#151920] border border-[#00FF75]/20 text-white/60 hover:text-white hover:border-[#00FF75]/40 transition-colors"
                         aria-label="Toggle color mode"
                     >
                         {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
                     </button>
 
-                    <div className="h-8 w-px bg-gray-300 dark:bg-gray-700 hidden sm:block"></div>
+                    <div className="h-8 w-px bg-[#00FF75]/20 hidden sm:block"></div>
 
                     {/* Profile */}
                     <div className="flex items-center space-x-3">
                         <div className="text-right hidden md:block">
-                            <p className="text-sm font-semibold text-gray-800 dark:text-white">{user?.name || 'Guest'}</p>
+                            <p className="text-sm font-semibold text-white">{user?.name || 'Guest'}</p>
                             {/* Displaying 'role' (e.g., Bank Team) for Lender, 'gstin' for MSME */}
-                            <p className="text-xs text-gray-500 font-mono tracking-wide">{user?.gstin || user?.branch || 'N/A'}</p>
+                            <p className="text-xs text-white/40 font-mono tracking-wide">{user?.gstin || user?.branch || 'N/A'}</p>
                         </div>
 
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 p-[2px]">
-                            <div className="w-full h-full rounded-full bg-white dark:bg-[#1a1b23] flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#00FF75] to-[#0DF86A] p-[2px] shadow-[0_0_10px_#00ff75]">
+                            <div className="w-full h-full rounded-full bg-[#0a0d12] flex items-center justify-center">
                                 {/* Note: Ensure 'pfp1' asset is correctly linked */}
                                 <img src={pfp1} alt="Profile" className="w-full h-full rounded-full object-cover opacity-80" />
                             </div>

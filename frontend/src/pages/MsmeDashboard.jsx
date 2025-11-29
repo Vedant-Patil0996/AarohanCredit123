@@ -53,7 +53,15 @@ export default function MsmeDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-[#111217] font-sans selection:bg-indigo-500/30 text-gray-800 dark:text-gray-100">
+    <div className="min-h-screen bg-[#0a0d12] font-sans text-white">
+      {/* Subtle grid overlay */}
+      <div 
+        className="fixed inset-0 opacity-[0.03] pointer-events-none z-0"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(0,255,117,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,117,0.1) 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
+        }}
+      />
 
       {/* 1. Sidebar Component */}
       <Sidebar
@@ -79,17 +87,17 @@ export default function MsmeDashboard() {
         />
 
         {/* 3. Page Content */}
-        <main className="flex-1 p-6 lg:p-8 overflow-y-auto">
+        <main className="flex-1 p-6 lg:p-8 overflow-y-auto relative z-10">
           {activeTab === 'home' && <Home isDarkMode={isDarkMode} />}
           {activeTab === 'reports' && <Reports isDarkMode={isDarkMode} />}
           {/* Placeholders for other routes */}
           {activeTab !== 'home' && activeTab !== 'reports' && (
-            <div className="flex flex-col items-center justify-center h-[60vh] text-gray-500">
-              <div className="w-16 h-16 bg-gray-800 rounded-2xl flex items-center justify-center mb-4 border border-gray-700">
-                <Activity size={32} />
+            <div className="flex flex-col items-center justify-center h-[60vh] text-white/60">
+              <div className="w-16 h-16 bg-[#151920] rounded-2xl flex items-center justify-center mb-4 border border-[#00FF75]/20">
+                <Activity size={32} className="text-[#00FF75]" />
               </div>
-              <h2 className="text-xl font-semibold text-gray-300 capitalize">{activeTab} Module</h2>
-              <p className="text-sm mt-2">Connecting to backend services...</p>
+              <h2 className="text-xl font-semibold text-white capitalize">{activeTab} Module</h2>
+              <p className="text-sm mt-2 text-white/40">Connecting to backend services...</p>
             </div>
           )}
         </main>
