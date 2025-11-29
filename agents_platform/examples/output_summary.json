@@ -1,16 +1,16 @@
 {
-  "report_id": "e4497f72-f785-47c2-900c-0254d1699c97",
+  "report_id": "035404c2-f769-4577-ae40-ffd54980d176",
   "msme_id": "MSME002",
-  "generated_at": "2025-11-29T05:31:31.250180",
-  "overall_creditworthiness": 67.72,
-  "summary": "This credit intelligence report evaluates the MSME's financial profile with an overall creditworthiness score of 67.7/100. The analysis reveals a RiskLevel.MEDIUM risk profile with a behavioral score of 720/1000. The business demonstrates positive cashflow of \u20b91,552,575.00. 1 credit products have been identified as suitable matches. Detailed analysis and recommendations are provided in the respective sections.",
+  "generated_at": "2025-11-29T09:55:01.431521",
+  "overall_creditworthiness": 64.88,
+  "summary": "This credit intelligence report evaluates the MSME's financial profile with an overall creditworthiness score of 64.9/100. The analysis reveals a RiskLevel.MEDIUM risk profile with a behavioral score of 649/1000. The business demonstrates positive cashflow of \u20b91,552,575.00. 1 credit products have been identified as suitable matches. Detailed analysis and recommendations are provided in the respective sections.",
   "risk_level": "medium",
-  "behavioral_score": 720.0,
+  "behavioral_score": 649.0,
   "net_cashflow": 1552575.0,
   "best_fit_products_count": 1,
   "key_insights": [
-    "The business exhibits strong fundamental financial health with substantial positive net cashflow (\u20b91.55M) and high cashflow stability (0.94).",
-    "Despite overall stability, the business faces short-term liquidity challenges, evidenced by frequent rapid balance drops and a low minimum balance (\u20b935k).",
-    "There is a potential revenue concentration risk due to a low number of inflow transactions (3 per month average), suggesting reliance on a few clients or infrequent large payments."
+    "Your business demonstrates strong financial health with a positive net cashflow of \u20b91,552,575 and a very high cashflow stability score.",
+    "Your behavioral score of 649 is good, reflecting responsible financial conduct, particularly in your repayment patterns and overall transaction regularity.",
+    "However, the analysis highlights significant balance volatility, frequent rapid balance changes, and a low minimum balance as key areas that pose liquidity risks."
   ]
 }
